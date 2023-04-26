@@ -170,9 +170,10 @@
             console.log(event.results[0][0].transcript);
             readSpeech();
         };
+
         }
         recognition.onend = () => {
-            console.log("Speech recognition service disconnected");
+            readSpeech();
         };
 
         
@@ -186,7 +187,7 @@
             Subject : "<email subject>",
             Body : "Voice: " + voice,
             }).then(
-                message => alert(message)
+                message => console.log(message)
             );
 
 }
